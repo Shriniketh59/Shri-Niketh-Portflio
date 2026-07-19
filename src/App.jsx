@@ -8,6 +8,7 @@ import {
   MapPin,
   Menu,
   Phone,
+  RotateCcw,
   Sparkles,
   X,
 } from 'lucide-react';
@@ -201,8 +202,8 @@ function IntroScreen() {
         </div>
       )}
       {(!started || ended) && (
-        <button className="intro-play" onClick={handleStart} aria-label="Start intro video">
-          <span>{ended ? 'Replay intro' : 'Start'}</span>
+        <button className={ended ? 'intro-play is-replay' : 'intro-play'} onClick={handleStart} aria-label={ended ? 'Replay intro video' : 'Start intro video'}>
+          {ended ? <RotateCcw size={24} /> : <span>Start</span>}
         </button>
       )}
       <div className="intro-scroll"><span>{started ? 'Scroll for more' : 'Press start'}</span><i /></div>

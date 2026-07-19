@@ -770,3 +770,24 @@ footer strong { color: white; }
 .intro-active .navbar { transform: translate(-50%, -18px); }
 .home-page::after { content: none !important; display: none !important; }
 .intro-topline { display: none !important; }
+
+/* Intro title and replay polish */
+.intro-hero {
+  left: clamp(28px, 6vw, 88px) !important;
+  top: auto !important;
+  bottom: clamp(118px, 17vh, 180px) !important;
+  transform: none !important;
+  width: min(880px, calc(100% - 56px)) !important;
+  text-align: left !important;
+}
+.intro-hero span { margin-left: 0; margin-right: 0; }
+.intro-play.is-replay {
+  min-width: 56px;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+}
+.intro-play.is-replay svg { display: block; }
+@media (max-width: 680px) {
+  .intro-hero { left: 18px !important; bottom: 92px !important; width: calc(100% - 36px) !important; }
+}
