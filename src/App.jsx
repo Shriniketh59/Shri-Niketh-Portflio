@@ -278,29 +278,17 @@ export default function App() {
         <section id="home" className={pageClass('home', 'home-page')}>
           <div className="home-shell">
             <motion.div className="home-copy" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75 }}>
-              <p className="eyebrow">AI and Data Science Student</p>
+              <p className="eyebrow">Portfolio Intro</p>
               <h1>Shri Niketh R</h1>
-              <p className="home-lede">Aspiring Generative AI Engineer, Software Engineer, and Entrepreneurship Enthusiast building intelligent software solutions for real-world problems.</p>
+              <p className="home-lede">B.Tech AI & Data Science student focused on Generative AI, Software Engineering, and Entrepreneurial product building.</p>
               <div className="role-chip-row">
-                {['Generative AI', 'Software Engineering', 'AI Products', 'Entrepreneurship'].map((item) => <span key={item}>{item}</span>)}
+                {['Generative AI', 'Software Engineering', 'Entrepreneurship'].map((item) => <span key={item}>{item}</span>)}
               </div>
               <div className="hero-actions">
-                <button type="button" className="btn-primary" onClick={() => goToPage('projects')}>View Projects <ArrowUpRight size={18} /></button>
-                <button type="button" className="btn-secondary" onClick={() => goToPage('contact')}><Mail size={18} /> Contact Me</button>
+                <button type="button" className="btn-primary" onClick={() => goToPage('about')}>About Me <ArrowUpRight size={18} /></button>
+                <button type="button" className="btn-secondary" onClick={() => goToPage('projects')}><Mail size={18} /> Projects</button>
               </div>
             </motion.div>
-
-            <motion.div className="home-profile" initial={{ opacity: 0, x: 34 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.75, delay: 0.1 }}>
-              <img src="/profile.png" alt="Shri Niketh R" />
-              <div className="profile-note top"><strong>Available</strong><span>Internships and entry-level software roles</span></div>
-              <div className="profile-note bottom"><strong>Focus</strong><span>AI products, SaaS tools, and reliable web apps</span></div>
-            </motion.div>
-
-            <div className="home-metrics">
-              <div><strong>11</strong><span>Public GitHub repos</span></div>
-              <div><strong>5</strong><span>Professional experiences</span></div>
-              <div><strong>2024-2028</strong><span>B.Tech AI and Data Science</span></div>
-            </div>
           </div>
         </section>
 
