@@ -174,6 +174,7 @@ function IntroScreen() {
     if (!video) return;
 
     setStarted(true);
+    setEnded(false);
     video.currentTime = 0;
     video.muted = false;
 
@@ -199,9 +200,9 @@ function IntroScreen() {
           <span>B.Tech in AI & Data Science</span>
         </div>
       )}
-      {!started && (
+      {(!started || ended) && (
         <button className="intro-play" onClick={handleStart} aria-label="Start intro video">
-          <span>Start</span>
+          <span>{ended ? 'Replay intro' : 'Start'}</span>
         </button>
       )}
       <div className="intro-scroll"><span>{started ? 'Scroll for more' : 'Press start'}</span><i /></div>
@@ -277,7 +278,7 @@ export default function App() {
             <motion.div className="about-story panel" {...fadeUp}>
               <Sparkles size={24} />
               <img className="about-photo" src="/profile.png" alt="Shri Niketh R" />
-              <h3>Profile</h3>
+              <h3>Shri Niketh</h3>
               <p>Hello! I am <strong>Shri Niketh R</strong>, a B.Tech student specializing in <strong>Computer Science Engineering (Artificial Intelligence and Data Analytics)</strong> with a strong passion for <strong>Software Engineering, Artificial Intelligence, Machine Learning, Generative AI, and Prompt Engineering</strong>.</p>
               <p>I enjoy building intelligent software solutions that solve real-world problems through technology. My interests span AI-powered applications, full-stack web development, data-driven systems, and modern software engineering practices.</p>
               <p>I continuously improve my technical expertise by developing practical projects, strengthening my software engineering fundamentals, and exploring emerging technologies.</p>
