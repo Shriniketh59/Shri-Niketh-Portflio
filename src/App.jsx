@@ -160,14 +160,13 @@ const languageItems = [
   { lang: 'German', level: 'Elementary proficiency', pct: 25, use: 'Basic reading, greetings, and beginner-level learning progress.' },
 ];
 
-function IntroScreen({ onComplete }) {
+function IntroScreen() {
   const [started, setStarted] = useState(false);
   const [ended, setEnded] = useState(false);
   const videoRef = useRef(null);
 
   const handleVideoEnd = () => {
     setEnded(true);
-    onComplete?.();
   };
 
   const handleStart = async () => {
@@ -194,9 +193,6 @@ function IntroScreen({ onComplete }) {
     <div className={`intro-screen ${started ? 'playing' : ''} ${ended ? 'ended' : ''}`}>
       <video ref={videoRef} src="/intro.mp4" preload="metadata" playsInline muted onEnded={handleVideoEnd} className="intro-video" />
       <div className="intro-shade" />
-      <div className="intro-topline">
-        <a href="mailto:shriniketheng@gmail.com">Email me</a>
-      </div>
       {ended && (
         <div className="intro-hero">
           <h1>Shri Niketh R</h1>
@@ -217,7 +213,6 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activePage, setActivePage] = useState('home');
-  const [introComplete, setIntroComplete] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -227,10 +222,10 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const hideNavigation = activePage === 'home' && !introComplete;
+    const hideNavigation = activePage === 'home' && !scrolled;
     document.body.classList.toggle('intro-active', hideNavigation);
     return () => document.body.classList.remove('intro-active');
-  }, [activePage, introComplete]);
+  }, [activePage, scrolled]);
 
   const goToPage = (page) => {
     setActivePage(page);
@@ -273,7 +268,7 @@ export default function App() {
         </nav>
 
         <section id="home" className={pageClass('home', 'home-page')}>
-          <IntroScreen onComplete={() => setIntroComplete(true)} />
+          <IntroScreen />
         </section>
 
         <section id="about" className={pageClass('about', 'content-page')}>

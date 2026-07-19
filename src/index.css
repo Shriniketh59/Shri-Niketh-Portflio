@@ -733,10 +733,7 @@ footer strong { color: white; }
 .home-page .intro-screen {
   min-height: 100vh;
 }
-.home-page .intro-topline { display: flex; }
-.home-page::after {
-  inset: 88px clamp(18px, 4vw, 56px) 32px;
-}
+
 .intro-hero {
   left: 50%;
   top: 52%;
@@ -763,8 +760,12 @@ footer strong { color: white; }
   text-transform: uppercase;
 }
 @media (max-width: 680px) {
-  .home-page::after { inset: 76px 12px 24px; }
   .intro-hero { top: 52%; width: calc(100% - 28px); }
   .intro-hero h1 { font-size: clamp(2.4rem, 14vw, 4.7rem); }
   .intro-scroll { bottom: 24px; width: calc(100% - 32px); letter-spacing: 0.18em; }
 }
+
+/* Intro scroll visibility polish */
+.navbar { transition: opacity 0.24s ease, visibility 0.24s ease, background 0.24s ease, box-shadow 0.24s ease; }
+.home-page::after { content: none !important; display: none !important; }
+.intro-topline { display: none !important; }
