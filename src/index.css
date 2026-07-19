@@ -684,7 +684,13 @@ footer strong { color: white; }
 }
 
 /* Minimal intro start screen */
-.intro-hero { display: none !important; }
+.intro-hero {
+  position: absolute;
+  z-index: 2;
+  left: clamp(24px, 6vw, 92px);
+  bottom: clamp(110px, 17vh, 190px);
+  width: min(920px, calc(100% - 48px));
+}
 .intro-play {
   width: auto;
   min-width: 136px;
