@@ -160,13 +160,14 @@ const languageItems = [
   { lang: 'German', level: 'Elementary proficiency', pct: 25, use: 'Basic reading, greetings, and beginner-level learning progress.' },
 ];
 
-function IntroScreen() {
+function IntroScreen({ onComplete }) {
   const [started, setStarted] = useState(false);
   const [ended, setEnded] = useState(false);
   const videoRef = useRef(null);
 
   const handleVideoEnd = () => {
     setEnded(true);
+    onComplete?.();
   };
 
   const handleStart = async () => {
@@ -216,6 +217,7 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activePage, setActivePage] = useState('home');
+  const [introComplete, setIntroComplete] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -223,6 +225,12 @@ export default function App() {
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    const hideNavigation = activePage === 'home' && !introComplete;
+    document.body.classList.toggle('intro-active', hideNavigation);
+    return () => document.body.classList.remove('intro-active');
+  }, [activePage, introComplete]);
 
   const goToPage = (page) => {
     setActivePage(page);
@@ -265,7 +273,7 @@ export default function App() {
         </nav>
 
         <section id="home" className={pageClass('home', 'home-page')}>
-          <IntroScreen />
+          <IntroScreen onComplete={() => setIntroComplete(true)} />
         </section>
 
         <section id="about" className={pageClass('about', 'content-page')}>
