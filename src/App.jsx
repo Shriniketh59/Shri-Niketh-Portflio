@@ -293,12 +293,12 @@ export default function App() {
         </section>
 
         <section id="about" className={pageClass('about', 'content-page')}>
-          <div className="section-head"><p>About</p><h2>Engineer in training, builder by practice.</h2></div>
+          <div className="section-head"><p>About</p><h2>Shri Niketh R — Profile</h2></div>
           <div className="about-layout">
             <motion.div className="about-story panel" {...fadeUp}>
               <Sparkles size={24} />
-              <h3>About Me</h3>
-              <p>Hello! I am <strong>Shri Niketh</strong>, a B.Tech student specializing in <strong>Computer Science Engineering (Artificial Intelligence and Data Analytics)</strong> with a strong passion for <strong>Software Engineering, Artificial Intelligence, Machine Learning, Generative AI, and Prompt Engineering</strong>.</p>
+              <h3>Profile</h3>
+              <p>Hello! I am <strong>Shri Niketh R</strong>, a B.Tech student specializing in <strong>Computer Science Engineering (Artificial Intelligence and Data Analytics)</strong> with a strong passion for <strong>Software Engineering, Artificial Intelligence, Machine Learning, Generative AI, and Prompt Engineering</strong>.</p>
               <p>I enjoy building intelligent software solutions that solve real-world problems through technology. My interests span AI-powered applications, full-stack web development, data-driven systems, and modern software engineering practices.</p>
               <p>I continuously improve my technical expertise by developing practical projects, strengthening my software engineering fundamentals, and exploring emerging technologies.</p>
               <p>Throughout my academic journey, I have worked on projects including <strong>NOVA AI</strong>, an <strong>AI-Based Grievance and Complaint Management System</strong>, and research work published in the <strong>R-Square Journal</strong>. These experiences have enhanced my understanding of AI application development, software design, teamwork, and innovation.</p>
