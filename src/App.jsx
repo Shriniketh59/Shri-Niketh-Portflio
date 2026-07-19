@@ -162,9 +162,14 @@ const languageItems = [
 
 function IntroScreen({ onFinish }) {
   const [started, setStarted] = useState(false);
+  const [ended, setEnded] = useState(false);
   const videoRef = useRef(null);
 
-  const handleEnd = () => {
+  const handleVideoEnd = () => {
+    setEnded(true);
+  };
+
+  const handleSkip = () => {
     onFinish();
   };
 
@@ -190,19 +195,21 @@ function IntroScreen({ onFinish }) {
 
   return (
     <div
-      className={`intro-screen ${started ? 'playing' : ''}`}
-      onWheel={(event) => started && event.deltaY > 10 && handleEnd()}
-      onTouchMove={() => started && handleEnd()}
+      className={`intro-screen ${started ? 'playing' : ''} ${ended ? 'ended' : ''}`}
+      onWheel={(event) => started && event.deltaY > 10 && handleSkip()}
+      onTouchMove={() => started && handleSkip()}
     >
-      <video ref={videoRef} src="/intro.mp4" preload="metadata" playsInline muted onEnded={handleEnd} className="intro-video" />
+      <video ref={videoRef} src="/intro.mp4" preload="metadata" playsInline muted onEnded={handleVideoEnd} className="intro-video" />
       <div className="intro-shade" />
       <div className="intro-topline">
         <a href="mailto:shriniketheng@gmail.com">Email me</a>
       </div>
-      <div className="intro-hero">
-        <h1>Shri Niketh R</h1>
-        <span>Aspiring Software Engineer • Generative AI Engineer • Entrepreneur</span>
-      </div>
+      {ended && (
+        <div className="intro-hero">
+          <h1>Shri Niketh R</h1>
+          <span>B.Tech in AI & Data Science</span>
+        </div>
+      )}
       {!started && (
         <button className="intro-play" onClick={handleStart} aria-label="Start intro video">
           <span>Start</span>
