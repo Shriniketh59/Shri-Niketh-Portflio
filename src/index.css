@@ -398,6 +398,43 @@ button { font: inherit; }
   line-height: 1.68;
   font-weight: 700;
 }
+
+/* Mobile-friendly adjustments */
+@media (max-width: 768px) {
+  .home-shell {
+    grid-template-columns: 1fr;
+    padding: 80px 16px;
+    min-height: auto;
+    gap: 20px;
+  }
+
+  .home-profile {
+    justify-self: center;
+    width: 100%;
+    padding: 8px;
+  }
+
+  .profile-note { display: none; }
+
+  .home-metrics { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .about-layout { grid-template-columns: 1fr; }
+
+  .navbar {
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 28px);
+    padding: 8px;
+  }
+
+  .intro-hero { left: 24px; bottom: 80px; width: calc(100% - 48px); }
+
+  /* Prevent decorative hero elements from overflowing on small screens */
+  .hero .framework,
+  .hero .vite {
+    display: none;
+  }
+}
 .skill-category-card .skill-meter {
   margin: 24px 0 4px;
 }
