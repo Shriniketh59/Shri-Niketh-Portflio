@@ -200,10 +200,8 @@ function IntroScreen({ onFinish }) {
         <a href="mailto:shriniketheng@gmail.com">Email me</a>
       </div>
       <div className="intro-hero">
-        <p>Portfolio intro</p>
         <h1>Shri Niketh R</h1>
-        <span>Aspiring Software Engineer</span>
-        <span>Generative AI Engineer</span>
+        <span>Aspiring Software Engineer • Generative AI Engineer • Entrepreneur</span>
       </div>
       {!started && (
         <button className="intro-play" onClick={handleStart} aria-label="Start intro video">
