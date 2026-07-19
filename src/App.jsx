@@ -171,16 +171,24 @@ function IntroScreen({ onFinish }) {
     setTimeout(onFinish, 650);
   };
 
-  const handleStart = () => {
+  const handleStart = async () => {
     const video = videoRef.current;
-    setStarted(true);
     if (!video) return;
+
+    setStarted(true);
     video.currentTime = 0;
     video.muted = false;
-    video.play().catch(() => {
+
+    try {
+      await video.play();
+    } catch {
       video.muted = true;
-      video.play();
-    });
+      try {
+        await video.play();
+      } catch {
+        // Ignore autoplay blocking in browsers that still reject playback.
+      }
+    }
   };
 
   return (
@@ -191,7 +199,7 @@ function IntroScreen({ onFinish }) {
       onWheel={(event) => started && event.deltaY > 10 && handleEnd()}
       onTouchMove={() => started && handleEnd()}
     >
-      <video ref={videoRef} src="/intro.mp4" preload="metadata" playsInline autoPlay muted onEnded={handleEnd} className="intro-video" />
+      <video ref={videoRef} src="/intro.mp4" preload="metadata" playsInline muted onEnded={handleEnd} className="intro-video" />
       <div className="intro-shade" />
       <div className="intro-topline">
         <a href="mailto:shriniketheng@gmail.com">Email me</a>
