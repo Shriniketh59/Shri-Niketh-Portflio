@@ -165,6 +165,16 @@ function IntroScreen({ onFinish }) {
   const [hiding, setHiding] = useState(false);
   const videoRef = useRef(null);
 
+  useEffect(() => {
+    // Automatically skip the intro on small screens to avoid blocking content
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+      setTimeout(() => {
+        setHiding(true);
+        onFinish();
+      }, 50);
+    }
+  }, [onFinish]);
+
   const handleEnd = () => {
     if (hiding) return;
     setHiding(true);
