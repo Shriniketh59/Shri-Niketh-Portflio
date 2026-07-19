@@ -165,16 +165,6 @@ function IntroScreen({ onFinish }) {
   const [hiding, setHiding] = useState(false);
   const videoRef = useRef(null);
 
-  useEffect(() => {
-    // Automatically skip the intro on small screens to avoid blocking content
-    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
-      setTimeout(() => {
-        setHiding(true);
-        onFinish();
-      }, 50);
-    }
-  }, [onFinish]);
-
   const handleEnd = () => {
     if (hiding) return;
     setHiding(true);
@@ -201,7 +191,7 @@ function IntroScreen({ onFinish }) {
       onWheel={(event) => started && event.deltaY > 10 && handleEnd()}
       onTouchMove={() => started && handleEnd()}
     >
-      <video ref={videoRef} src="/intro.mp4" preload="metadata" playsInline onEnded={handleEnd} className="intro-video" />
+      <video ref={videoRef} src="/intro.mp4" preload="metadata" playsInline autoPlay muted onEnded={handleEnd} className="intro-video" />
       <div className="intro-shade" />
       <div className="intro-topline">
         <a href="mailto:shriniketheng@gmail.com">Email me</a>
