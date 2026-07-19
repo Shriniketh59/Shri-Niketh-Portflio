@@ -160,17 +160,13 @@ const languageItems = [
   { lang: 'German', level: 'Elementary proficiency', pct: 25, use: 'Basic reading, greetings, and beginner-level learning progress.' },
 ];
 
-function IntroScreen({ onFinish }) {
+function IntroScreen() {
   const [started, setStarted] = useState(false);
   const [ended, setEnded] = useState(false);
   const videoRef = useRef(null);
 
   const handleVideoEnd = () => {
     setEnded(true);
-  };
-
-  const handleSkip = () => {
-    onFinish();
   };
 
   const handleStart = async () => {
@@ -194,11 +190,7 @@ function IntroScreen({ onFinish }) {
   };
 
   return (
-    <div
-      className={`intro-screen ${started ? 'playing' : ''} ${ended ? 'ended' : ''}`}
-      onWheel={(event) => started && event.deltaY > 10 && handleSkip()}
-      onTouchMove={() => started && handleSkip()}
-    >
+    <div className={`intro-screen ${started ? 'playing' : ''} ${ended ? 'ended' : ''}`}>
       <video ref={videoRef} src="/intro.mp4" preload="metadata" playsInline muted onEnded={handleVideoEnd} className="intro-video" />
       <div className="intro-shade" />
       <div className="intro-topline">
@@ -223,7 +215,6 @@ function IntroScreen({ onFinish }) {
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [introDone, setIntroDone] = useState(false);
   const [activePage, setActivePage] = useState('home');
 
   useEffect(() => {
@@ -242,9 +233,7 @@ export default function App() {
   const pageClass = (page, extra = '') => `page-view ${extra} ${activePage === page ? 'active' : ''}`;
 
   return (
-    <>
-      {!introDone && <IntroScreen onFinish={() => setIntroDone(true)} />}
-      <motion.div className="site-shell" initial={{ opacity: 0 }} animate={{ opacity: introDone ? 1 : 0 }} transition={{ duration: 0.7 }}>
+    <motion.div className="site-shell" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }}>
         <div className="site-bg" />
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
           <div className="nav-links">
@@ -276,20 +265,7 @@ export default function App() {
         </nav>
 
         <section id="home" className={pageClass('home', 'home-page')}>
-          <div className="home-shell">
-            <motion.div className="home-copy" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75 }}>
-              <p className="eyebrow">Portfolio Intro</p>
-              <h1>Shri Niketh R</h1>
-              <p className="home-lede">B.Tech AI & Data Science student focused on Generative AI, Software Engineering, and Entrepreneurial product building.</p>
-              <div className="role-chip-row">
-                {['Generative AI', 'Software Engineering', 'Entrepreneurship'].map((item) => <span key={item}>{item}</span>)}
-              </div>
-              <div className="hero-actions">
-                <button type="button" className="btn-primary" onClick={() => goToPage('about')}>About Me <ArrowUpRight size={18} /></button>
-                <button type="button" className="btn-secondary" onClick={() => goToPage('projects')}><Mail size={18} /> Projects</button>
-              </div>
-            </motion.div>
-          </div>
+          <IntroScreen />
         </section>
 
         <section id="about" className={pageClass('about', 'content-page')}>
@@ -297,6 +273,7 @@ export default function App() {
           <div className="about-layout">
             <motion.div className="about-story panel" {...fadeUp}>
               <Sparkles size={24} />
+              <img className="about-photo" src="/profile.png" alt="Shri Niketh R" />
               <h3>Profile</h3>
               <p>Hello! I am <strong>Shri Niketh R</strong>, a B.Tech student specializing in <strong>Computer Science Engineering (Artificial Intelligence and Data Analytics)</strong> with a strong passion for <strong>Software Engineering, Artificial Intelligence, Machine Learning, Generative AI, and Prompt Engineering</strong>.</p>
               <p>I enjoy building intelligent software solutions that solve real-world problems through technology. My interests span AI-powered applications, full-stack web development, data-driven systems, and modern software engineering practices.</p>
@@ -453,6 +430,5 @@ export default function App() {
 
         <footer>Designed and built by <strong>Shri Niketh R</strong> - 2026</footer>
       </motion.div>
-    </>
   );
 }
