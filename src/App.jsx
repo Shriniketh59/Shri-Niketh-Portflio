@@ -207,7 +207,7 @@ function IntroScreen() {
           <span>Start</span>
         </button>
       )}
-      <div className="intro-scroll"><span>{started ? 'Scroll to enter home' : 'Press start'}</span><i /></div>
+      <div className="intro-scroll"><span>{started ? 'Scroll for more' : 'Press start'}</span><i /></div>
     </div>
   );
 }
