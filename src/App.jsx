@@ -162,13 +162,10 @@ const languageItems = [
 
 function IntroScreen({ onFinish }) {
   const [started, setStarted] = useState(false);
-  const [hiding, setHiding] = useState(false);
   const videoRef = useRef(null);
 
   const handleEnd = () => {
-    if (hiding) return;
-    setHiding(true);
-    setTimeout(onFinish, 650);
+    onFinish();
   };
 
   const handleStart = async () => {
@@ -192,10 +189,8 @@ function IntroScreen({ onFinish }) {
   };
 
   return (
-    <motion.div
+    <div
       className={`intro-screen ${started ? 'playing' : ''}`}
-      animate={{ opacity: hiding ? 0 : 1 }}
-      transition={{ duration: 0.65 }}
       onWheel={(event) => started && event.deltaY > 10 && handleEnd()}
       onTouchMove={() => started && handleEnd()}
     >
@@ -204,13 +199,19 @@ function IntroScreen({ onFinish }) {
       <div className="intro-topline">
         <a href="mailto:shriniketheng@gmail.com">Email me</a>
       </div>
+      <div className="intro-hero">
+        <p>Portfolio intro</p>
+        <h1>Shri Niketh R</h1>
+        <span>Aspiring Software Engineer</span>
+        <span>Generative AI Engineer</span>
+      </div>
       {!started && (
         <button className="intro-play" onClick={handleStart} aria-label="Start intro video">
           <span>Start</span>
         </button>
       )}
-      <div className="intro-scroll"><span>{started ? 'Scroll to skip' : 'Press start'}</span><i /></div>
-    </motion.div>
+      <div className="intro-scroll"><span>{started ? 'Scroll to enter home' : 'Press start'}</span><i /></div>
+    </div>
   );
 }
 
